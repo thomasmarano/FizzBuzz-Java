@@ -13,29 +13,24 @@ describe("Feature Test", function() {
 
     it('planes can be instructed to land at an airport', function(){
         plane.land(airport);
-        expect(airport.planes()).toContain(plane)
+        expect(airport.planes()).toContain(plane);
       });
 
+    it('planes can be instructed to take-off from an airport', function(){
+        plane.land(airport)
+        plane.takeoff(airport);
+        expect(airport.planes()).not.toContain(plane);
+    });
 
+    it('blocks take off if weather is stormy', function(){
+        plane.land(airport)
+        spyOn(airport, 'isStormy').and.returnValue(true);
+        expect(function(){airport.clearForTakeoff(plane);}).toThrowError('Stormy');
+        expect(airport.planes()).toContain(plane);
+    });
 });
 
-
 //
-//
-// describe("Plane", function(){
-//
-//     var plane;
-//
-//
-//     beforeEach(function() {
-//       plane = new Plane();
-//     });
-//
-//     describe('should tell you if plane is landed or not', function(){
-//         it ('returns plane status', function(){
-//           expect(plane.landed).toEqual(false)
-//         });
-//     });
-//
-//
-// });
+// As an air traffic controller
+// To ensure safety
+// I want to prevent takeoff when weather is stormy

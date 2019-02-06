@@ -1,5 +1,6 @@
 function Airport() {
     this.hangar = [];
+
 };
 
  //
@@ -9,4 +10,15 @@ function Airport() {
 
  Airport.prototype.clearForLanding = function(plane) {
       this.hangar.push(plane);
+ }
+
+ Airport.prototype.clearForTakeoff = function(plane){
+   if (this.isStormy()) {
+     throw new Error('Stormy');
+   }
+      this.hangar.pop(plane)
+ }
+
+ Airport.prototype.isStormy = function() {
+      return false;
  }

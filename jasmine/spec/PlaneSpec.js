@@ -8,7 +8,7 @@ describe("Plane", function(){
 
     beforeEach(function() {
       plane = new Plane();
-      airport = jasmine.createSpyObj('airport', ['clearForLanding']);
+      airport = jasmine.createSpyObj('airport', ['clearForLanding', 'clearForTakeoff']);
     });
 
 
@@ -17,10 +17,8 @@ describe("Plane", function(){
           expect(airport.clearForLanding).toHaveBeenCalledWith(plane);
     });
 
+    it('can takeoff from an airport', function(){
+        plane.takeoff(airport)
+        expect(airport.clearForTakeoff).toHaveBeenCalledWith(plane);
+    });
 });
-
-
-
-// //As an air traffic controller
-// So I can get passengers to a destination
-// I want to instruct a plane to land at an airport
